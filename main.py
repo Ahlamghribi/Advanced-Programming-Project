@@ -7,7 +7,7 @@ QUESTION_FILE = "questions.json"
 
 def save_json(file_name, data):
     try:
-        with open(file_name, 'w') as f:
+        with open(file_name, 'w',encoding="utf-8") as f:
             json.dump(data, f,indent=4)
     except Exception as e:
         print(f"Error saving {file_name}: {e}")
@@ -15,9 +15,10 @@ def save_json(file_name, data):
 def load_json(file_name):
     try:
         if os.path.exists(file_name):
-            with open(file_name, 'r') as f:
+            with open(file_name, 'r',encoding='utf-8') as f:
              return json.load(f)
+        return [] if file_name == QUESTION_FILE else {} 
     except json.JSONDecodeError:
         print(f"Error: {file_name} is corrupted. Creating new file.")
-        return None                
+        return [] if file_name == QUESTION_FILE else {}               
     
