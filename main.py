@@ -1,5 +1,6 @@
 import os
 import json
+import time
 
 #constants pour les fichiers json a utiliser 
 USER_FILE = "users.json"
@@ -21,4 +22,21 @@ def load_json(file_name):
     except json.JSONDecodeError:
         print(f"Error: {file_name} is corrupted. Creating new file.")
         return [] if file_name == QUESTION_FILE else {}               
-    
+def initialize_questions():
+    if not os.path.exists(QUESTION_FILE):
+        questions = [
+            {
+               "question": "What is the data type in Python for representing text?",
+                "options": ["a) int", "b) str", "c) list"],
+                "answer": "b",
+                "time_limit": 30 
+            }
+            {
+                "question": "What is the average complexity of searching in a sorted array?",
+                "options": ["a) O(1)", "b) O(log n)", "c) O(n)"],
+                "answer": "b",
+                "time_limit": 30    
+            }      
+     ] 
+        save_json(QUESTION_FILE, questions)
+           
