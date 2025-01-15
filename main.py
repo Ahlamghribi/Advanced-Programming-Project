@@ -39,4 +39,14 @@ def initialize_questions():
             }      
      ] 
         save_json(QUESTION_FILE, questions)
+        
+def load_questions():
+    questions= load_json(QUESTION_FILE)
+    if not questions:
+        initialize_questions()
+        questions = load_json(QUESTION_FILE)
+        if not questions:
+            print("Error : Could not initialize questions.Please check file permissions")
+            exit()
+    return questions               
            
