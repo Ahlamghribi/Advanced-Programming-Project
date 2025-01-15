@@ -50,3 +50,14 @@ def load_questions():
             exit()
     return questions               
            
+def get_user():
+    users = load_json(USER_FILE)
+    while True:
+        user_id = input("Enter your username or ID: ").strip()
+        if user_id:
+            break
+        print("Username cannot be empty. Please try again.")
+    if user_id not in users:
+        users[user_id] = {"history": []}
+        save_json(USER_FILE, users)
+    return user_id, users
