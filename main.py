@@ -83,3 +83,10 @@ def select_category(questions):
                 print("Invalid choice. Please try again.")
         except ValueError:
             print("Please enter a valid number.")
+            
+def provide_detailed_feedback(question, answer, time_taken):
+    is_correct = answer == question["answer"]
+    feedback = "Correct!" if is_correct else f"Wrong! Correct answer: {question['answer']}"
+    if time_taken > question.get("time_limit", 30):
+        feedback += " (Time limit exceeded)"
+    return is_correct, feedback            
