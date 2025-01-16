@@ -61,3 +61,25 @@ def get_user():
         users[user_id] = {"history": []}
         save_json(USER_FILE, users)
     return user_id, users
+
+def get_available_categories(questions):
+    return sorted(set(q.get("category", "Uncategorized") for q in questions))
+
+def select_category(questions):
+    categories = get_available_categories(questions)
+    print("\nAvailable categories:")
+    for i, category in enumerate(categories, 1):
+        print(f"{i}. {category}")
+    print(f"{len(categories) + 1}. All categories")
+    while True:
+        try:
+            choice = int(input("Choose a category: "))
+            if 1 <= choice <= len(categories):
+                selected_category = categories[choice- 1]
+                return [q for q in questions if q.get("category") == selected_category]
+            elif choice == len(categories) + 1:
+                return questions
+            else:
+                print("Invalid choice. Please try again.")
+        except ValueError:
+            print("Please enter a valid number.")
