@@ -198,6 +198,43 @@ def administer_qcm(user_id, users):
     return True
 
 
+def show_menu():
+    print("\nDevQuiz Menu:")
+    print("1. Take Quiz")
+    print("2. View History")
+    print("3. View Best Users")
+    print("4. Exit")
+    while True:
+        try:
+            choice = int(input("Enter your choice (1-4): "))
+            if 1 <= choice <= 4:
+                return choice
+            print("Invalid choice. Please enter a number between 1 and 4.")
+        except ValueError:
+            print("Please enter a valid number.")
+            
+def main():
+    print("Welcome to DevQuiz! Test, Learn, and Conquer!")
+    user_id, users = get_user()
+    
+    while True:
+        choice = show_menu()
+        
+        if choice == 1:
+            quiz_completed = administer_qcm(user_id, users)
+            if not quiz_completed:
+                print("\nQuiz terminated.")
+        elif choice == 2:
+            show_history(users[user_id]["history"])
+        elif choice == 3:
+            get_best_users(users)
+        else:  # choice == 4
+            print("Thank you for using DevQuiz! Goodbye!")
+            break
+
+if __name__ == "__main__":
+    main()
+    
 def save_results(user_id, users, score, total_time):
     users[user_id]["history"].append({
         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -222,19 +259,3 @@ def export_to_csv(users):
         print("Data successfully exported to 'user_history.csv'.")
     except Exception as e:
         print(f"Error exporting to CSV: {e}")
-
-def main():
-    try:
-        print("Welcome to the QCM Application!")
-        user_id, users = get_user()
-        administer_qcm(user_id, users)
-
-        if input("\nDo you want to export your history to CSV? (y/n): ").strip().lower() == 'y':
-            export_to_csv(users)
-    except KeyboardInterrupt:
-        print("\nProgram terminated by user.")
-    except Exception as e:
-        print(f"An unexpected error occurred: {str(e)}")
-
-if __name__ == "__main__":
-    main()
