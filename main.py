@@ -142,7 +142,6 @@ def show_history(history):
 
 
 def administer_qcm(user_id, users):
-    # Simple quiz administration
     questions = load_questions()
     quiz_questions = select_category(questions)
     
@@ -180,14 +179,21 @@ def administer_qcm(user_id, users):
         
         total_time += time_taken
         question_count += 1
+    total_time_in_seconds = int(total_time)  # Convert to seconds
+    hours = total_time_in_seconds // 3600
+    minutes = (total_time_in_seconds % 3600) // 60
+    seconds = total_time_in_seconds % 60
+    formatted_time = f"{hours:02}:{minutes:02}:{seconds:02}"
     
+    # Format the date to only show YYYY-MM-DD HH:MM:SS
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if question_count > 0:
         final_score = (score / question_count) * 20
         users[user_id]["history"].append({
-            "date": str(datetime.now()),
+            "date": current_time,  # Use formatted current time
             "score": f"{final_score:.1f}/20",
             "category": quiz_questions[0]['category'] if question_count > 0 else "N/A",
-            "total_time": f"{total_time:.1f}"
+            "total_time": formatted_time  # Save formatted time
         })
         save_json(USER_FILE, users)
         
