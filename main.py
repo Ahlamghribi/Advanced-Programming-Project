@@ -191,6 +191,13 @@ def administer_qcm(user_id, users):
     print(f"Score: {final_score}")
     print(f"Total time: {total_time:.1f} seconds")
     print(f"Average time per question: {average_time:.1f} seconds")
+        users[user_id]["history"].append({
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "score": final_score,
+        "total_time": f"{total_time:.1f}",
+        "category": "All" if len(selected_questions) == len(all_questions) else selected_questions[0]['category']
+    })
+    save_json(USER_FILE, users)
 
 
 
