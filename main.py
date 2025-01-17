@@ -57,12 +57,23 @@ def get_user():
     users = load_json(USER_FILE)
     while True:
         user_id = input("Enter your username or ID: ").strip()
-        if user_id:
+        if user_id:  # Check if input is not empty
             break
         print("Username cannot be empty. Please try again.")
-    if user_id not in users:
+
+    if user_id in users:
+        print(f"\nWelcome back, {user_id}! Here's your QCM history:")
+        history = users[user_id].get("history", [])
+        if history:
+            for entry in history:
+                print(f"- Date: {entry['date']}, Score: {entry['score']}")
+        else:
+            print("No previous history found.")
+    else:
+        print(f"\nWelcome, {user_id}! Your profile has been created.")
         users[user_id] = {"history": []}
         save_json(USER_FILE, users)
+
     return user_id, users
 
 def get_available_categories(questions):
