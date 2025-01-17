@@ -99,7 +99,7 @@ def select_category(questions):
             return None
         return filtered_questions
 
-
+import random
 def provide_detailed_feedback(question, answer, time_taken):
     feedback = {
         True: [
@@ -128,6 +128,17 @@ def provide_detailed_feedback(question, answer, time_taken):
     return is_correct, detail
   
 
+def show_history(history):
+    if not history:
+        print("No history found")
+        return
+    
+    print("\nYour Quiz History:")
+    for entry in history:
+        print(f"-Date: {entry['date']}")
+        print(f"-Score: {entry['score']}")
+        print(f"-Category: {entry['category']}")
+        print()
 def administer_qcm(user_id, users): 
     all_questions = load_questions()
     selected_questions = select_category(all_questions)
