@@ -139,93 +139,63 @@ def show_history(history):
         print(f"-Score: {entry['score']}")
         print(f"-Category: {entry['category']}")
         print()
-def administer_qcm(user_id, users): 
-    all_questions = load_questions()
-    selected_questions = select_category(all_questions)
+
+
+
+def administer_qcm(user_id, users):
+    questions = load_questions()
+    quiz_questions = select_category(questions)
     
-    if not selected_questions:
-        print("No questions available in this category.")
-        return
+    if quiz_questions is None:
+        return False
     
     score = 0
-    total = len(selected_questions)
     total_time = 0
     question_count = 0
-    max_total_time = 600  # Total time limit in seconds (e.g., 10 minutes)
     
-    print("\nStarting the quiz. Answer carefully!\n")
-    print(f"Time limit per question: 30 seconds")
-    print(f"Total available time: {max_total_time // 60} minutes\n")
-    
-    start_test_time = time.time()  # Start time for the entire test
-    
-    for i, question in enumerate(selected_questions, 1):
-        if question_count >= 7:  # Limit the number of questions to 7
-            choice = input("\nYou have answered 7 questions. Do you want to continue with another category or stop? (cont/stop): ").strip().lower()
-            if choice == 'stop':
+    for i, question in enumerate(quiz_questions):
+        if question_count >= 7:
+            choice = input("You've answered 7 questions. Continue? (yes/no): ")
+            if choice.lower() != 'yes':
                 break
-            else:
-                selected_questions = select_category(all_questions)
-                question_count = 0  # Reset question counter for a new category
         
-        print(f"Question {i}/{total} [{question['category']}]:")
+        print(f"\nQuestion {i+1}:")
         print(question['question'])
         for option in question['options']:
             print(option)
         
-        question_start_time = time.time()
+        start_time = time.time()
         while True:
-            total_elapsed_time = time.time() - start_test_time
-            if total_elapsed_time > max_total_time:
-                print("\nTotal time exceeded. The test is finished.")
-                break
-            
-            time_taken_for_question = time.time() - question_start_time
-            if time_taken_for_question > question.get("time_limit", 30):  # 30 seconds default time limit
-                print(f"\nTime's up for this question. You didn't answer in time.")
-                break
-            
-            answer = input(f"Your answer (a/b/c) [{30 - int(time_taken_for_question)} seconds remaining]: ").strip().lower()
+            answer = input("Your answer (a/b/c) or 'exit' to quit: ").lower()
+            if answer == 'exit':
+                return False
             if answer in ['a', 'b', 'c']:
                 break
-            print("Please enter a valid option (a, b, or c)")
+            print("Invalid input. Please enter a, b, or c.")
         
-        end_time = time.time()
-        time_taken = end_time - question_start_time
-        total_time += time_taken
-        question_count += 1
+        time_taken = time.time() - start_time
         
-        is_correct, feedback = provide_detailed_feedback(question, answer, time_taken)
-        print(feedback)
-        
-        if time_taken <= question.get("time_limit", 30) and is_correct:
+        if provide_detailed_feedback(question, answer, time_taken):
             score += 1
         
-        if total_elapsed_time > max_total_time:
-            break
+        total_time += time_taken
+        question_count += 1
     
-    # Adjust the score out of 20
-    adjusted_score = (score / total) * 20
-    adjusted_score = round(adjusted_score, 1)
+    # Save results
+    if question_count > 0:  # Only save if at least one question was answered
+        final_score = (score / question_count) * 20
+        users[user_id]["history"].append({
+            "date": str(datetime.now()),
+            "score": f"{final_score:.1f}/20",
+            "category": quiz_questions[0]['category'] if question_count > 0 else "N/A",
+            "total_time": f"{total_time:.1f}"
+        })
+        save_json(USER_FILE, users)
+        
+        print(f"\nFinal Score: {final_score:.1f}/20")
+        print(f"Total Time: {total_time:.1f} seconds")
     
-    final_score = f"{adjusted_score}/20"
-    average_time = total_time / question_count if question_count else 0
-    
-    print(f"\nFinal Results:")
-    print(f"Score: {final_score}")
-    print(f"Total time: {total_time:.1f} seconds")
-    print(f"Average time per question: {average_time:.1f} seconds")
-    
-    # Save the results
-    users[user_id]["history"].append({
-        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "score": final_score,
-        "total_time": f"{total_time:.1f}",
-        "category": "All" if len(selected_questions) == len(all_questions) else selected_questions[0]['category']
-    })
-    save_json(USER_FILE, users)
-
-
+    return True
 
 
 def save_results(user_id, users, score, total_time):
