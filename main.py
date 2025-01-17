@@ -114,4 +114,11 @@ users[user_id]["history"].append({
 })
 save_json(USER_FILE, users)
 
-
+def export_to_csv(users):
+with open("user_history.csv", "w", newline="", encoding="utf-8") as csvfile:
+fieldnames = ["Username", "Date", "Score"]
+writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+writer.writeheader()
+for user, data in users.items():
+for entry in data["history"]:
+writer.writerow({"Username": user, "Date": entry["date"], "Score": entry["score"]})
