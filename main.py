@@ -132,14 +132,19 @@ def save_results(user_id, users, score, total_time):
     save_json(USER_FILE, users)
 
 def export_to_csv(users):
-    with open("user_history.csv", "w", newline="", encoding="utf-8") as csvfile:
-        fieldnames = ["Username", "Date", "Score"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        for user, data in users.items():
-            for entry in data["history"]:
-                writer.writerow({
-                    "Username": user,
-                    "Date": entry["date"],
-                    "Score": entry["score"]
-                })
+    try:
+        with open("user_history.csv", "w", newline="", encoding="utf-8") as csvfile:
+            fieldnames = ["Username", "Date", "Score"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for user, data in users.items():
+                for entry in data["history"]:
+                    writer.writerow({
+                        "Username": user,
+                        "Date": entry["date"],
+                        "Score": entry["score"]
+                    })
+        print("Data successfully exported to 'user_history.csv'.")
+    except Exception as e:
+        print(f"Error exporting to CSV: {e}")
+
