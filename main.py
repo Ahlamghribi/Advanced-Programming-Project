@@ -72,24 +72,32 @@ def get_available_categories():
 
 # Function to select a category of questions
 def select_category(questions):
-    categories = get_available_categories(questions)
-    print("\nAvailable categories:")
-    for i, category in enumerate(categories, 1):
-        print(f"{i}. {category}")
+    categories = get_available_categories()
+    print("\nCategories:")
+    for i in range(len(categories)):
+        print(f"{i+1}. {categories[i]}")
     print(f"{len(categories) + 1}. All categories")
     
     while True:
         try:
-            choice = int(input("\nChoose a category (enter the number): "))
-            if 1 <= choice <= len(categories):
-                selected_category = categories[choice - 1]
-                return [q for q in questions if q['category'] == selected_category]
-            elif choice == len(categories) + 1:
-                return questions
-            else:
-                print("Invalid choice. Please try again.")
+            choice = int(input("Choose a category number (or 0 to exit): "))
+            if choice == 0:
+                return None
+            if 1 <= choice <= len(categories) + 1:
+                break
+            print("Invalid choice. Please try again.")
         except ValueError:
             print("Please enter a valid number.")
+    
+    if choice == len(categories) + 1:
+        return questions
+    else:
+        selected_category = categories[choice - 1]
+        filtered_questions = [q for q in questions if q['category'] == selected_category]
+        if not filtered_questions:
+            print("No questions available for this category.")
+            return None
+        return filtered_questions
 
 
 def provide_detailed_feedback(question, answer, time_taken):
