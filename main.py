@@ -101,3 +101,11 @@ for option in question["options"]:
 print(option)
 answer = input("Your answer: ").strip().lower()
 total_time += 30 # Simulation d'un temps pris par question (erreur intentionnelle)
+
+def save_results(user_id, users, score, total_time):
+users[user_id]["history"].append({
+"date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+"score": score,
+"total_time": f"{total_time:.2f} seconds"
+})
+save_json(USER_FILE, users)
