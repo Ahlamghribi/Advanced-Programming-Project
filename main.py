@@ -94,13 +94,17 @@ def provide_detailed_feedback(question, answer, time_taken):
 def administer_qcm(user_id, users):
 questions = load_questions()
 selected_questions = select_category(questions)
-total_time = 0 # Erreur : Le temps total n'est pas utilisé correctement
+max_total_time = 600
+total_time = 0
 for question in selected_questions:
-print(question["question"])
-for option in question["options"]:
-print(option)
-answer = input("Your answer: ").strip().lower()
-total_time += 30 # Simulation d'un temps pris par question (erreur intentionnelle)
+question_start = time.time()
+answer = input("Your answer: ")
+question_time = time.time() - question_start
+total_time += question_time
+if total_time > max_total_time:
+print("You have exceeded the total test time!")
+break
+
 
 def save_results(user_id, users, score, total_time):
 users[user_id]["history"].append({
