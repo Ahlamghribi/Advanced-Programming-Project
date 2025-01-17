@@ -141,8 +141,8 @@ def show_history(history):
         print()
 
 
-
 def administer_qcm(user_id, users):
+    # Simple quiz administration
     questions = load_questions()
     quiz_questions = select_category(questions)
     
@@ -181,8 +181,7 @@ def administer_qcm(user_id, users):
         total_time += time_taken
         question_count += 1
     
-    # Save results
-    if question_count > 0:  # Only save if at least one question was answered
+    if question_count > 0:
         final_score = (score / question_count) * 20
         users[user_id]["history"].append({
             "date": str(datetime.now()),
@@ -194,9 +193,14 @@ def administer_qcm(user_id, users):
         
         print(f"\nFinal Score: {final_score:.1f}/20")
         print(f"Total Time: {total_time:.1f} seconds")
+        
+        # hna we ask if the user wants to save the history
+        save_history_choice = input("Would you like to save your quiz history? (yes/no): ").lower()
+        
+        if save_history_choice == 'yes':
+            export_to_csv(user_id, users)  
     
     return True
-
 
 def show_menu():
     print("\nDevQuiz Menu:")
@@ -212,7 +216,27 @@ def show_menu():
             print("Invalid choice. Please enter a number between 1 and 4.")
         except ValueError:
             print("Please enter a valid number.")
-            
+
+
+def export_to_csv(user_id, users):
+    history = users.get(user_id, {}).get("history", [])
+    
+    if not history:
+        print("No history available to export.")
+        return
+    
+    with open("user_history.csv", mode="a", newline="") as file: 
+        writer = csv.writer(file)
+        
+        file.seek(0, os.SEEK_END)   
+        if file.tell() == 0:  
+            writer.writerow(["Date", "Score", "Category", "Total Time"])
+        
+        for entry in history:
+            writer.writerow([entry["date"], entry["score"], entry["category"], entry["total_time"]])
+    
+    print("History successfully exported to user_history.csv")
+
 def main():
     print("Welcome to DevQuiz! Test, Learn, and Conquer!")
     user_id, users = get_user()
@@ -234,28 +258,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-def save_results(user_id, users, score, total_time):
-    users[user_id]["history"].append({
-        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "score": score,
-        "total_time": f"{total_time:.2f} seconds"
-    })
-    save_json(USER_FILE, users)
-
-def export_to_csv(users):
-    try:
-        with open("user_history.csv", "w", newline="", encoding="utf-8") as csvfile:
-            fieldnames = ["Username", "Date", "Score"]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for user, data in users.items():
-                for entry in data["history"]:
-                    writer.writerow({
-                        "Username": user,
-                        "Date": entry["date"],
-                        "Score": entry["score"]
-                    })
-        print("Data successfully exported to 'user_history.csv'.")
-    except Exception as e:
-        print(f"Error exporting to CSV: {e}")
