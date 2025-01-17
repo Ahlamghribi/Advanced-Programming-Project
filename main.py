@@ -67,8 +67,8 @@ def get_user():
     
     return user_id, users
     
-def get_available_categories(questions):
-    return sorted(set(q.get("category", "Uncategorized") for q in questions))
+def get_available_categories():
+    return ["Python", "Java", "HTML", "JavaScript", "CSS", "PHP", "SQL"]
 
 # Function to select a category of questions
 def select_category(questions):
