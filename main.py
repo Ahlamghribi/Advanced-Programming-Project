@@ -118,34 +118,34 @@ def provide_detailed_feedback(question, answer, time_taken):
     return is_correct, detail
   
 
-def administer_qcm(user_id, users):
-    questions = load_questions()
-    selected_questions = select_category(questions)
-    max_total_time = 600
-    total_time = 0
+def administer_qcm(user_id, users): 
+    all_questions = load_questions()
+    selected_questions = select_category(all_questions)
+    
+    if not selected_questions:
+        print("No questions available in this category.")
+        return
+    
     score = 0
-
-    for question in selected_questions:
-        print("\nQuestion:", question["question"])
-        for option in question["options"]:
-            print(option)
-
-        question_start = time.time()
-        answer = input("Your answer: ").strip()
-        question_time = time.time() - question_start
-
-        total_time += question_time
-        if total_time > max_total_time:
-            print("You have exceeded the total test time!")
-            break
-
-        is_correct, feedback = provide_detailed_feedback(question, answer, question_time)
-        print(feedback)
-        if is_correct:
-            score += 1
-
-    save_results(user_id, users, score, total_time)
-    print(f"\nTest completed! Your score: {score}/{len(selected_questions)}")
+    total = len(selected_questions)
+    total_time = 0
+    question_count = 0
+    max_total_time = 600  # Total time limit in seconds (e.g., 10 minutes)
+    
+    print("\nStarting the quiz. Answer carefully!\n")
+    print(f"Time limit per question: 30 seconds")
+    print(f"Total available time: {max_total_time // 60} minutes\n")
+    
+    start_test_time = time.time()  # Start time for the entire test
+    
+    for i, question in enumerate(selected_questions, 1):
+        if question_count >= 7:  # Limit the number of questions to 7
+            choice = input("\nYou have answered 7 questions. Do you want to continue with another category or stop? (cont/stop): ").strip().lower()
+            if choice == 'stop':
+                break
+            else:
+                selected_questions = select_category(all_questions)
+                question_count = 0  # Reset question counter for a new category
 
 
 def save_results(user_id, users, score, total_time):
