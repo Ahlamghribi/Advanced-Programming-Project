@@ -32,7 +32,7 @@ def initialize_questions():
                 "options": ["a) int", "b) str", "c) list"],
                 "answer": "b",
                 "time_limit": 30 
-            }
+            },
             {
                 "question": "What is the average complexity of searching in a sorted array?",
                 "options": ["a) O(1)", "b) O(log n)", "c) O(n)"],
