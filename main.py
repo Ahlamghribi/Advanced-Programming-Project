@@ -181,6 +181,17 @@ def administer_qcm(user_id, users):
         
         if total_elapsed_time > max_total_time:
             break
+                adjusted_score = (score / total) * 20
+    adjusted_score = round(adjusted_score, 1)
+    
+    final_score = f"{adjusted_score}/20"
+    average_time = total_time / question_count if question_count else 0
+    
+    print(f"\nFinal Results:")
+    print(f"Score: {final_score}")
+    print(f"Total time: {total_time:.1f} seconds")
+    print(f"Average time per question: {average_time:.1f} seconds")
+
 
 
 
