@@ -148,3 +148,18 @@ def export_to_csv(users):
     except Exception as e:
         print(f"Error exporting to CSV: {e}")
 
+def main():
+    try:
+        print("Welcome to the QCM Application!")
+        user_id, users = get_user()
+        administer_qcm(user_id, users)
+
+        if input("\nDo you want to export your history to CSV? (y/n): ").strip().lower() == 'y':
+            export_to_csv(users)
+    except KeyboardInterrupt:
+        print("\nProgram terminated by user.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {str(e)}")
+
+if __name__ == "__main__":
+    main()
