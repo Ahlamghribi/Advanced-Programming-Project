@@ -89,4 +89,15 @@ def provide_detailed_feedback(question, answer, time_taken):
     feedback = "Correct!" if is_correct else f"Wrong! Correct answer: {question['answer']}"
     if time_taken > question.get("time_limit", 30):
         feedback += " (Time limit exceeded)"
-    return is_correct, feedback            
+    return is_correct, feedback    
+
+def administer_qcm(user_id, users):
+questions = load_questions()
+selected_questions = select_category(questions)
+total_time = 0 # Erreur : Le temps total n'est pas utilisé correctement
+for question in selected_questions:
+print(question["question"])
+for option in question["options"]:
+print(option)
+answer = input("Your answer: ").strip().lower()
+total_time += 30 # Simulation d'un temps pris par question (erreur intentionnelle)
