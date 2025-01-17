@@ -3,6 +3,7 @@ import json
 import time
 import csv
 from datetime import datetime
+import random
 
 #constants pour les fichiers json a utiliser 
 USER_FILE = "users.json"
@@ -86,12 +87,36 @@ def select_category(questions):
         except ValueError:
             print("Please enter a valid number.")
             
+
+
+
 def provide_detailed_feedback(question, answer, time_taken):
-    is_correct = answer == question["answer"]
-    feedback = "Correct!" if is_correct else f"Wrong! Correct answer: {question['answer']}"
+    feedback = {
+        True: [
+            "Excellent! That's the correct answer!",
+            "Perfect! You are right!",
+            "Well done! That's correct!"
+        ],
+        False: [
+            "Not quite. The correct answer was ",
+            "Incorrect. The expected answer was ",
+            "That's not the right answer. You should have answered "
+        ]
+    }
+    
+    is_correct = answer == question['answer']
+    
+    base_feedback = random.choice(feedback[is_correct])
+    if is_correct:
+        detail = f"{base_feedback}\nTime taken: {time_taken:.1f} seconds"
+    else:
+        detail = f"{base_feedback}{question['answer']}\nTime taken: {time_taken:.1f} seconds"
+        
     if time_taken > question.get("time_limit", 30):
-        feedback += " (Time limit exceeded)"
-    return is_correct, feedback    
+        detail += " (Time limit exceeded)"
+        
+    return is_correct, detail
+  
 
 def administer_qcm(user_id, users):
     questions = load_questions()
