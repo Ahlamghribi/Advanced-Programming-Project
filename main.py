@@ -146,6 +146,42 @@ def administer_qcm(user_id, users):
             else:
                 selected_questions = select_category(all_questions)
                 question_count = 0  # Reset question counter for a new category
+                        print(f"Question {i}/{total} [{question['category']}]:")
+        print(question['question'])
+        for option in question['options']:
+            print(option)
+        
+        question_start_time = time.time()
+        while True:
+            total_elapsed_time = time.time() - start_test_time
+            if total_elapsed_time > max_total_time:
+                print("\nTotal time exceeded. The test is finished.")
+                break
+            
+            time_taken_for_question = time.time() - question_start_time
+            if time_taken_for_question > question.get("time_limit", 30):  # 30 seconds default time limit
+                print(f"\nTime's up for this question. You didn't answer in time.")
+                break
+            
+            answer = input(f"Your answer (a/b/c) [{30 - int(time_taken_for_question)} seconds remaining]: ").strip().lower()
+            if answer in ['a', 'b', 'c']:
+                break
+            print("Please enter a valid option (a, b, or c)")
+        
+        end_time = time.time()
+        time_taken = end_time - question_start_time
+        total_time += time_taken
+        question_count += 1
+        
+        is_correct, feedback = provide_detailed_feedback(question, answer, time_taken)
+        print(feedback)
+        
+        if time_taken <= question.get("time_limit", 30) and is_correct:
+            score += 1
+        
+        if total_elapsed_time > max_total_time:
+            break
+
 
 
 def save_results(user_id, users, score, total_time):
