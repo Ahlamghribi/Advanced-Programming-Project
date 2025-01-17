@@ -7,11 +7,11 @@ USER_FILE = "users.json"
 QUESTION_FILE = "questions.json"
 
 def save_json(file_name, data):
-    try:
-        with open(file_name, 'w',encoding="utf-8") as f:
-            json.dump(data, f,indent=4)
-    except Exception as e:
-        print(f"Error saving {file_name}: {e}")
+try:
+with open(file_name, "w", encoding="utf-8") as file: # Correction ici
+json.dump(data, file, indent=4)
+except Exception as e:
+print(f"Error saving to {file_name}: {e}")
         
 def load_json(file_name):
     try:
@@ -109,3 +109,5 @@ users[user_id]["history"].append({
 "total_time": f"{total_time:.2f} seconds"
 })
 save_json(USER_FILE, users)
+
+
