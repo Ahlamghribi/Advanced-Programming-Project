@@ -157,7 +157,8 @@ def administer_qcm(user_id, users):
             else:
                 selected_questions = select_category(all_questions)
                 question_count = 0  # Reset question counter for a new category
-                        print(f"Question {i}/{total} [{question['category']}]:")
+        
+        print(f"Question {i}/{total} [{question['category']}]:")
         print(question['question'])
         for option in question['options']:
             print(option)
@@ -192,7 +193,9 @@ def administer_qcm(user_id, users):
         
         if total_elapsed_time > max_total_time:
             break
-                adjusted_score = (score / total) * 20
+    
+    # Adjust the score out of 20
+    adjusted_score = (score / total) * 20
     adjusted_score = round(adjusted_score, 1)
     
     final_score = f"{adjusted_score}/20"
@@ -202,7 +205,9 @@ def administer_qcm(user_id, users):
     print(f"Score: {final_score}")
     print(f"Total time: {total_time:.1f} seconds")
     print(f"Average time per question: {average_time:.1f} seconds")
-        users[user_id]["history"].append({
+    
+    # Save the results
+    users[user_id]["history"].append({
         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "score": final_score,
         "total_time": f"{total_time:.1f}",
