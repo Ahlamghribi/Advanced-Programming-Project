@@ -1,0 +1,346 @@
+[
+    {
+        "question": "Python - What is the keyword to define a function?",
+        "options": ["a) function", "b) def", "c) define"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - Which method is used to add an element to a list?",
+        "options": ["a) add()", "b) push()", "c) append()"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - How do you declare an empty dictionary?",
+        "options": ["a) dict()", "b) {}", "c) Both are correct"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - How do you handle exceptions in Python?",
+        "options": ["a) try/catch", "b) try/except", "c) if/else"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - What is an immutable data type?",
+        "options": ["a) list", "b) dict", "c) tuple"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - How do you get the type of a variable?",
+        "options": ["a) typeof(var)", "b) type(var)", "c) var.type()"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Python - What does the ** operator do?",
+        "options": ["a) Multiplication", "b) Exponentiation", "c) Double pointer"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Python"
+    },
+    {
+        "question": "Java - What is the main method in a Java class?",
+        "options": ["a) run()", "b) main()", "c) start()"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - How do you declare a final variable in Java?",
+        "options": ["a) const", "b) final", "c) static"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - What is the superclass of all classes in Java?",
+        "options": ["a) Main", "b) Object", "c) Super"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - How do you handle exceptions in Java?",
+        "options": ["a) try/catch", "b) try/except", "c) if/else"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - Which package contains collections in Java?",
+        "options": ["a) java.util", "b) java.lang", "c) java.io"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - What is the difference between '==' and '.equals()'?",
+        "options": ["a) None", "b) == compares references, .equals() compares content", "c) == is faster"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "Java - What does the keyword 'interface' do?",
+        "options": ["a) Defines a class", "b) Defines a contract", "c) Creates an instance"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "Java"
+    },
+    {
+        "question": "JavaScript - How do you declare a variable in modern JavaScript?",
+        "options": ["a) var", "b) let", "c) const"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "JavaScript - Which operator compares both value and type?",
+        "options": ["a) ==", "b) ===", "c) ="],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+
+    {
+        "question": "JavaScript - What is a closure?",
+        "options": ["a) A function", "b) A function with access to its parent scope", "c) A class"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "JavaScript - Which method converts an object to JSON?",
+        "options": ["a) JSON.parse()", "b) JSON.stringify()", "c) toString()"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "JavaScript - How do you declare an arrow function?",
+        "options": ["a) function() {}", "b) => {}", "c) () => {}"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "JavaScript - What is hoisting?",
+        "options": ["a) Moving declarations to the top", "b) Code optimization", "c) Error handling"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "JavaScript - What is the type of NaN?",
+        "options": ["a) undefined", "b) object", "c) number"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "JavaScript"
+    },
+    {
+        "question": "HTML - Which tag defines a hyperlink?",
+        "options": ["a) <link>", "b) <a>", "c) <href>"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - Which tag creates a line break?",
+        "options": ["a) <break>", "b) <br>", "c) <nl>"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - How do you define the title of a web page?",
+        "options": ["a) <head>", "b) <title>", "c) <header>"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - Which is the latest version of HTML?",
+        "options": ["a) HTML4", "b) HTML5", "c) HTML6"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - Which tag creates an unordered list?",
+        "options": ["a) <ul>", "b) <ol>", "c) <list>"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - How do you create a form?",
+        "options": ["a) <form>", "b) <input>", "c) <submit>"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "HTML - Which tag defines an image?",
+        "options": ["a) <picture>", "b) <img>", "c) <image>"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "HTML"
+    },
+    {
+        "question": "CSS - How do you select a class in CSS?",
+        "options": ["a) #class", "b) .class", "c) @class"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - Which property sets the text color?",
+        "options": ["a) text-color", "b) font-color", "c) color"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - How do you center an element horizontally?",
+        "options": ["a) align: center", "b) margin: auto", "c) position: center"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - Which unit is relative to the font size?",
+        "options": ["a) px", "b) em", "c) %"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - How do you select an ID in CSS?",
+        "options": ["a) #id", "b) .id", "c) @id"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - Which property defines letter spacing?",
+        "options": ["a) letter-spacing", "b) text-spacing", "c) word-spacing"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "CSS - How do you define a border in CSS?",
+        "options": ["a) border: 1px solid black", "b) border-line: 1px black", "c) border-style: 1px"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "CSS"
+    },
+    {
+        "question": "PHP - How do you declare a variable in PHP?",
+        "options": ["a) #variable", "b) $variable", "c) @variable"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - Which function prints text in PHP?",
+        "options": ["a) print()", "b) echo()", "c) Both are correct"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - How do you start a PHP block?",
+        "options": ["a) <?php", "b) <php>", "c) <?"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - Which function reads an entire file?",
+        "options": ["a) file_get()", "b) file_read()", "c) file_get_contents()"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - How do you connect to a MySQL database?",
+        "options": ["a) mysql_connect()", "b) mysqli_connect()", "c) db_connect()"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - Which function hashes a password?",
+        "options": ["a) hash()", "b) password_hash()", "c) crypt()"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "PHP - How do you include a PHP file?",
+        "options": ["a) include()", "b) require()", "c) Both are correct"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "PHP"
+    },
+    {
+        "question": "SQL - How do you select all fields?",
+        "options": ["a) SELECT *", "b) SELECT ALL", "c) SELECT FIELDS"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - Which clause filters the results?",
+        "options": ["a) WHERE", "b) FILTER", "c) HAVING"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - How do you join two tables?",
+        "options": ["a) MERGE", "b) JOIN", "c) CONNECT"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - Which command modifies data?",
+        "options": ["a) MODIFY", "b) ALTER", "c) UPDATE"],
+        "answer": "c",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - How do you sort results?",
+        "options": ["a) SORT BY", "b) ORDER BY", "c) ARRANGE BY"],
+        "answer": "b",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - Which clause groups results?",
+        "options": ["a) GROUP BY", "b) CLUSTER BY", "c) ARRANGE BY"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "SQL"
+    },
+    {
+        "question": "SQL - How do you limit the number of results?",
+        "options": ["a) LIMIT", "b) TOP", "c) RESTRICT"],
+        "answer": "a",
+        "time_limit": 30,
+        "category": "SQL"
+    }
+]
