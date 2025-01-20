@@ -1,0 +1,19 @@
+# .gitignore
+# Byte-compiled files
+__pycache__/
+*.pyc
+
+# Django-specific
+db.sqlite3
+*.sqlite3
+/staticfiles/
+
+# Migrations
+migrations/
+
+# Environment files
+.env
+
+# System files
+.DS_Store
+Thumbs.db
