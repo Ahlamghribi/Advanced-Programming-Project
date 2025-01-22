@@ -1,0 +1,225 @@
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="icon" href="{% static 'qcm_app/images/DevQUIZ.png' %}" type="image/png" size="400px">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results - DevQuiz App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a192f, #112240);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #64ffda;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            animation: stars 15s linear infinite;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .result-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .score-card {
+            background: rgba(17, 34, 64, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score {
+            font-size: 3rem;
+            color: #64ffda;
+            margin: 10px 0;
+        }
+
+        .percentage {
+            font-size: 1.5rem;
+            color: #8892b0;
+        }
+
+        .history-section {
+            margin-top: 40px;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: transparent;
+            color: #64ffda;
+            border: 2px solid #64ffda;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+        }
+
+        .secondary-button {
+            border-color: #8892b0;
+            color: #8892b0;
+        }
+        .message-popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 2.5s forwards;
+            z-index: 1000;
+        }
+
+        .success-message {
+            background: rgba(0, 255, 157, 0.15);
+            border: 1px solid #64ffda;
+            color: #64ffda;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.15);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+
+        .secondary-button:hover {
+            background: rgba(136, 146, 176, 0.1);
+            box-shadow: 0 0 20px rgba(136, 146, 176, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Quiz Results</h1>
+        
+        {% if last_score %}
+        <div class="score-card">
+            <div class="score-display">
+                <h2>Your Score is:</h2>
+                <div class="score">{{ last_score.scaled_score }}/20</div>
+                <div class="percentage">{{ last_score.percentage }}%</div>
+            </div>
+            
+            <form action="{% url 'save_quiz_history' user_id %}" method="post" style="text-align: center; margin-top: 20px;">
+                {% csrf_token %}
+                <input type="hidden" name="score" value="{{ last_score.scaled_score }}">
+                <input type="hidden" name="category" value="{{ latest_result.category|default:'all' }}">
+                <button type="submit" class="button">Save Quiz Result</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if history %}
+        <div class="history-section score-card">
+            <h2>Your Quiz History</h2>
+            {% for result in history %}
+            <div class="history-item">
+                <div>
+                    <p>Score: {{ result.scaled_score }}</p>
+                    <p>Category: {{ result.category }}</p>
+                </div>
+                <div>
+                    <p>Date :{{ result.date }}</p>
+                    <p>Percentage :{{ result.percentage }}%</p>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <form action="{% url 'export_history' user_id %}" method="post" style="text-align: center; margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="button secondary-button">Download Complete History</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="button-container">
+            <a href="{% url 'choose_category' user_id=user_id %}" class="button">Take Another Quiz</a>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = document.querySelectorAll('.message-popup');
+        messages.forEach(function(message) {
+            setTimeout(function() {
+                message.remove();
+            }, 3000);
+        });
+    });
+</script>
+</html>
