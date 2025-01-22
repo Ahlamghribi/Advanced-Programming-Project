@@ -13,7 +13,7 @@ Transform your study sessions into engaging quiz adventures!
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/Version-1.0-red.svg)](https://github.com/Ahlamghribi/Advanced-Programming-Project)
 
-[Launch Demo](https://drive.google.com/file/d/1PaUCZltUZmQO0-xAWQyb3DYvAymPQxbb/view
+[SEE THE Demo HERE :](https://drive.google.com/file/d/1PaUCZltUZmQO0-xAWQyb3DYvAymPQxbb/view
 )
 
 </div>
@@ -115,9 +115,6 @@ python main.py
 - Export history reports (CSV).
 - Set study goals.
 
- [vidéo sur Google Drive](https://drive.google.com/file/d/1PaUCZltUZmQO0-xAWQyb3DYvAymPQxbb/view) pour plus de détails.
-
-
 ## 🔮 Future Plans
 
 ### Coming Soon!
@@ -146,14 +143,7 @@ We're a group of passionate Cyber Security students from USTHB working together 
   - Cyber Security Engineering Student at USTHB
   - 📧 besmelalaidli@gmail.com
   - 💼 [Github](https://github.com/)
-<div align="center">
 
-|<img src="/api/placeholder/100/100" alt="Team Member" width="100px" height="100px" style="border-radius:50%">|<img src="/api/placeholder/100/100" alt="Team Member" width="100px" height="100px" style="border-radius:50%">|<img src="/api/placeholder/100/100" alt="Team Member" width="100px" height="100px" style="border-radius:50%">|
-|:---:|:---:|:---:|
-|**Ghribi Ahlem**|**Mehenni May Fatma Zohra**|**Laidli Besmella Meriem**|
-|[GitHub](https://github.com/Ahlamghribi)|[GitHub](https://github.com/mayversion)|[GitHub](https://github.com/besmalam)|
-
-</div>
 
 ## 🤝 Contributing
 
