@@ -50,7 +50,7 @@ DevQuiz is your go-to study companion, designed by students, for students! Wheth
 ### 🎮 Student-Focused Learning
 - **Smart Study Sessions**
   - Timed quizzes that match exam conditions
-  - 
+    
 ### 👥 Social Learning
 - **Learn Together**
   - Compare scores with classmates
