@@ -242,7 +242,26 @@ def export_to_csv(user_id, users):
             writer.writerow([entry["date"], entry["score"], entry["category"], entry["total_time"]])
     
     print("History successfully exported to user_history.csv")
-
+ 
+def get_best_users(users):
+    # Calculate average scores for each user
+    user_scores = []
+    for username, data in users.items():
+        if data["history"]:
+            scores = [float(entry["score"].split('/')[0]) for entry in data["history"]]
+            avg_score = sum(scores) / len(scores)
+            user_scores.append((username, avg_score))
+    
+    # Sort by average score and get top 5
+    user_scores.sort(key=lambda x: x[1], reverse=True)
+    
+    print("\nTop Performers:")
+    if not user_scores:
+        print("No quiz results recorded yet.")
+        return
+    
+    for i, (username, avg_score) in enumerate(user_scores[:5], 1):
+        print(f"{i}. {username}: {avg_score:.1f}/20 average")
 def main():
     print("Welcome to DevQuiz! Test, Learn, and Conquer!")
     user_id, users = get_user()
