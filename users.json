@@ -140,5 +140,144 @@
                 "category": "SQL"
             }
         ]
+    },
+    "& C:/Users/may/AppData/Local/Programs/Python/Python312/python.exe c:/Users/may/Advanced-Programming-Project/main.py": {
+        "history": []
+    },
+    "may": {
+        "history": [
+            {
+                "date": "2025-01-22 22:20:04",
+                "score": "20.0/20",
+                "category": "PHP",
+                "total_time": "00:00:12"
+            }
+        ]
+    },
+    "malak": {
+        "history": [
+            {
+                "date": "2025-01-22 22:20:59",
+                "score": "20.0/20",
+                "category": "CSS",
+                "total_time": "00:00:06"
+            }
+        ]
+    },
+    "manal": {
+        "history": []
+    },
+    "malik": {
+        "history": [
+            {
+                "date": "2025-01-22 22:23:33",
+                "score": "20.0/20",
+                "category": "CSS",
+                "total_time": "00:00:08"
+            }
+        ]
+    },
+    "nawal": {
+        "history": [
+            {
+                "date": "2025-01-22 22:25:29",
+                "score": "20.0/20",
+                "category": "PHP",
+                "total_time": "00:00:07"
+            }
+        ]
+    },
+    "nwal": {
+        "history": []
+    },
+    "ahlem": {
+        "history": [
+            {
+                "date": "2025-01-22 22:27:01",
+                "score": "20.0/20",
+                "category": "Java",
+                "total_time": "00:00:07"
+            }
+        ]
+    },
+    "maria": {
+        "history": [
+            {
+                "date": "2025-01-22 22:33:55",
+                "score": "20.0/20",
+                "category": "PHP",
+                "total_time": "00:00:05"
+            }
+        ]
+    },
+    "sarah": {
+        "history": [
+            {
+                "date": "2025-01-22 22:42:53",
+                "score": "20.0/20",
+                "category": "JavaScript",
+                "total_time": "00:00:06"
+            },
+            {
+                "date": "2025-01-22 22:43:59",
+                "score": "20.0/20",
+                "category": "Python",
+                "total_time": "00:00:09"
+            }
+        ]
+    },
+    "hadjer": {
+        "history": [
+            {
+                "date": "2025-01-22 22:46:49",
+                "score": "20.0/20",
+                "category": "PHP",
+                "total_time": "00:00:05"
+            },
+            {
+                "date": "2025-01-22 22:47:32",
+                "score": "20.0/20",
+                "category": "Python",
+                "total_time": "00:00:06"
+            },
+            {
+                "date": "2025-01-22 22:47:59",
+                "score": "20.0/20",
+                "category": "SQL",
+                "total_time": "00:00:05"
+            }
+        ]
+    },
+    "mina": {
+        "history": [
+            {
+                "date": "2025-01-22 22:53:59",
+                "score": "5.7/20",
+                "category": "Java",
+                "total_time": "00:00:04"
+            }
+        ]
+    },
+    "yasmine": {
+        "history": [
+            {
+                "date": "2025-01-22 22:54:56",
+                "score": "2.9/20",
+                "category": "JavaScript",
+                "total_time": "00:00:06"
+            },
+            {
+                "date": "2025-01-22 22:55:32",
+                "score": "8.6/20",
+                "category": "CSS",
+                "total_time": "00:00:05"
+            },
+            {
+                "date": "2025-01-22 22:55:59",
+                "score": "5.7/20",
+                "category": "SQL",
+                "total_time": "00:00:05"
+            }
+        ]
     }
 }

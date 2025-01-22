@@ -1,59 +1,55 @@
 import os
 import json
 import time
-import csv
 from datetime import datetime
-import random
 
-#constants pour les fichiers json a utiliser 
+# Simple file names
 USER_FILE = "users.json"
 QUESTION_FILE = "questions.json"
 
 def save_json(file_name, data):
-    try:
-        with open(file_name, "w", encoding="utf-8") as file:
-            json.dump(data, file, indent=4)
-    except Exception as e:
-        print(f"Error saving to {file_name}: {e}")
-        
+    # Simple file saving without error handling
+    with open(file_name, "w") as file:
+        json.dump(data, file, indent=4)
+
 def load_json(file_name):
-    try:
-        if os.path.exists(file_name):
-            with open(file_name, 'r',encoding='utf-8') as f:
-             return json.load(f)
-        return [] if file_name == QUESTION_FILE else {} 
-    except json.JSONDecodeError:
-        print(f"Error: {file_name} is corrupted. Creating new file.")
-        return [] if file_name == QUESTION_FILE else {}               
+    # Simple file loading
+    if os.path.exists(file_name):
+        with open(file_name, 'r') as file:
+            return json.load(file)
+    return {} if file_name == USER_FILE else []
+
 def initialize_questions():
+    # Basic questions setup
     if not os.path.exists(QUESTION_FILE):
         questions = [
             {
-               "question": "What is the data type in Python for representing text?",
+                "question": "What is the data type in Python for representing text?",
                 "options": ["a) int", "b) str", "c) list"],
                 "answer": "b",
-                "time_limit": 30 
+                "category": "Python",
+                "time_limit": 30
             },
             {
                 "question": "What is the average complexity of searching in a sorted array?",
                 "options": ["a) O(1)", "b) O(log n)", "c) O(n)"],
                 "answer": "b",
+                "category": "Algorithms",
                 "time_limit": 30    
             }      
-     ] 
+        ]
         save_json(QUESTION_FILE, questions)
-        
+
 def load_questions():
-    questions= load_json(QUESTION_FILE)
+    # Simple question loading
+    questions = load_json(QUESTION_FILE)
     if not questions:
         initialize_questions()
         questions = load_json(QUESTION_FILE)
-        if not questions:
-            print("Error : Could not initialize questions.Please check file permissions")
-            exit()
-    return questions               
-           
+    return questions
+
 def get_user():
+    # Simple user management
     users = load_json(USER_FILE)
     user_id = input("Enter your username please: ")
     
@@ -66,12 +62,13 @@ def get_user():
         save_json(USER_FILE, users)
     
     return user_id, users
-    
+
 def get_available_categories():
+    # Simple category list
     return ["Python", "Java", "HTML", "JavaScript", "CSS", "PHP", "SQL"]
 
-# Function to select a category of questions
 def select_category(questions):
+    # Simple category selection
     categories = get_available_categories()
     print("\nCategories:")
     for i in range(len(categories)):
@@ -99,49 +96,52 @@ def select_category(questions):
             return None
         return filtered_questions
 
-import random
 def provide_detailed_feedback(question, answer, time_taken):
-    feedback = {
-        True: [
-            "Excellent! That's the correct answer!",
-            "Perfect! You are right!",
-            "Well done! That's correct!"
-        ],
-        False: [
-            "Not quite. The correct answer was ",
-            "Incorrect. The expected answer was ",
-            "That's not the right answer. You should have answered "
-        ]
-    }
-    
+    # Simple feedback system
     is_correct = answer == question['answer']
     
-    base_feedback = random.choice(feedback[is_correct])
     if is_correct:
-        detail = f"{base_feedback}\nTime taken: {time_taken:.1f} seconds"
+        print(f"Correct! Time taken: {time_taken:.1f} seconds")
     else:
-        detail = f"{base_feedback}{question['answer']}\nTime taken: {time_taken:.1f} seconds"
-        
-    if time_taken > question.get("time_limit", 30):
-        detail += " (Time limit exceeded)"
-        
-    return is_correct, detail
-  
+        print(f"Wrong! The correct answer was {question['answer']}")
+        print(f"Time taken: {time_taken:.1f} seconds")
+    
+    return is_correct
 
 def show_history(history):
+    # Simple history display
     if not history:
         print("No history found")
         return
     
     print("\nYour Quiz History:")
     for entry in history:
-        print(f"-Date: {entry['date']}")
-        print(f"-Score: {entry['score']}")
-        print(f"-Category: {entry['category']}")
+        print(f"Date: {entry['date']}")
+        print(f"Score: {entry['score']}")
+        print(f"Category: {entry['category']}")
         print()
 
-
+def get_best_users(users):
+    # Calculate average scores for each user
+    user_scores = []
+    for username, data in users.items():
+        if data["history"]:
+            scores = [float(entry["score"].split('/')[0]) for entry in data["history"]]
+            avg_score = sum(scores) / len(scores)
+            user_scores.append((username, avg_score))
+    
+    # Sort by average score and get top 5
+    user_scores.sort(key=lambda x: x[1], reverse=True)
+    
+    print("\nTop Performers:")
+    if not user_scores:
+        print("No quiz results recorded yet.")
+        return
+    
+    for i, (username, avg_score) in enumerate(user_scores[:5], 1):
+        print(f"{i}. {username}: {avg_score:.1f}/20 average")
 def administer_qcm(user_id, users):
+    # Simple quiz administration
     questions = load_questions()
     quiz_questions = select_category(questions)
     
@@ -179,6 +179,7 @@ def administer_qcm(user_id, users):
         
         total_time += time_taken
         question_count += 1
+
     total_time_in_seconds = int(total_time)  # Convert to seconds
     hours = total_time_in_seconds // 3600
     minutes = (total_time_in_seconds % 3600) // 60
@@ -187,6 +188,7 @@ def administer_qcm(user_id, users):
     
     # Format the date to only show YYYY-MM-DD HH:MM:SS
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     if question_count > 0:
         final_score = (score / question_count) * 20
         users[user_id]["history"].append({
@@ -200,13 +202,14 @@ def administer_qcm(user_id, users):
         print(f"\nFinal Score: {final_score:.1f}/20")
         print(f"Total Time: {total_time:.1f} seconds")
         
-        # hna we ask if the user wants to save the history
+        # Ask if the user wants to save the history
         save_history_choice = input("Would you like to save your quiz history? (yes/no): ").lower()
         
         if save_history_choice == 'yes':
-            export_to_csv(user_id, users)  
+            export_to_csv(user_id, users)  # Call to export history to CSV
     
     return True
+
 
 def show_menu():
     print("\nDevQuiz Menu:")
@@ -222,26 +225,6 @@ def show_menu():
             print("Invalid choice. Please enter a number between 1 and 4.")
         except ValueError:
             print("Please enter a valid number.")
-
-
-def export_to_csv(user_id, users):
-    history = users.get(user_id, {}).get("history", [])
-    
-    if not history:
-        print("No history available to export.")
-        return
-    
-    with open("user_history.csv", mode="a", newline="") as file: 
-        writer = csv.writer(file)
-        
-        file.seek(0, os.SEEK_END)   
-        if file.tell() == 0:  
-            writer.writerow(["Date", "Score", "Category", "Total Time"])
-        
-        for entry in history:
-            writer.writerow([entry["date"], entry["score"], entry["category"], entry["total_time"]])
-    
-    print("History successfully exported to user_history.csv")
 
 def main():
     print("Welcome to DevQuiz! Test, Learn, and Conquer!")
@@ -261,6 +244,26 @@ def main():
         else:  # choice == 4
             print("Thank you for using DevQuiz! Goodbye!")
             break
+import csv
+def export_to_csv(user_id, users):
+    history = users.get(user_id, {}).get("history", [])
+    
+    if not history:
+        print("No history available to export.")
+        return
+    
+    with open("user_history.csv", mode="a", newline="") as file:  # Changement de "w" à "a"
+        writer = csv.writer(file)
+        
+        # Écrire les en-têtes seulement si le fichier est vide
+        file.seek(0, os.SEEK_END)  # Aller à la fin du fichier
+        if file.tell() == 0:  # Si le fichier est vide
+            writer.writerow(["Date", "Score", "Category", "Total Time"])
+        
+        for entry in history:
+            writer.writerow([entry["date"], entry["score"], entry["category"], entry["total_time"]])
+    
+    print("History successfully exported to user_history.csv")
 
 if __name__ == "__main__":
     main()
