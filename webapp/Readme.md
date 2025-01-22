@@ -64,7 +64,6 @@ DevQuiz is your go-to study companion, designed by students, for students! Wheth
 🔹 Python & Django - Robust Backend
 🔹 HTML5 & CSS3 - Responsive Frontend
 🔹 JavaScript - Interactive Features
-🔹 SQLite - Data Management
 ```
 
 ### Key Libraries
